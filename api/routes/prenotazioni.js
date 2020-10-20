@@ -26,10 +26,6 @@ router.get("/numberLibriUtente/:utente", (_req, _res, _next) => {
 });
 
 router.post('/addPrenotazione',(_req, _res) => {
-    console.log("Ciao");
-    console.log("Utente: " + _req.body.utente);
-    console.log(_req.body.libro);
-    console.log(_req.body.dataPrenotazione);
     DB.query({
         sql:'call addPrenotazione(?,?,?)', values:[_req.body.utente, _req.body.libro, _req.body.dataPrenotazione]
         }, (_err, _result) => {
