@@ -3,10 +3,10 @@ const router = express.Router();
 const DB = require("../../db/main");
 const JOut = require("../../shared/jout"); // Formatta rispota 
 
-
 router.get("/libriUtente/:utente", (_req, _res, _next) => {
+    console.log(_req.params.utente);
     DB.query({
-        sql:'call getLibriUtente(?)',values:[_req.params.campo]
+        sql:'call getLibriUtente(?)',values:[_req.params.utente]
         }, (_err, _result) => {
         if (_err) {
             console.log(_err);
@@ -15,9 +15,13 @@ router.get("/libriUtente/:utente", (_req, _res, _next) => {
     });
 });
 
-router.post('/addPrenotazione',(req, res) => {
+router.post('/addPrenotazione',(_req, _res) => {
+    console.log("Ciao");
+    console.log("Utente: " + _req.body.utente);
+    console.log(_req.body.libro);
+    console.log(_req.body.dataPrenotazione);
     DB.query({
-        sql:'call addPrenotazione(?,?,?)', values:[req.body.utente, req.body.libro, req.body.dataPrenotazione]
+        sql:'call addPrenotazione(?,?,?)', values:[_req.body.utente, _req.body.libro, _req.body.dataPrenotazione]
         }, (_err, _result) => {
         if (_err) {
             console.log(_err);
@@ -25,11 +29,10 @@ router.post('/addPrenotazione',(req, res) => {
         } else { return _res.status(200).json(JOut(_result, {})); }
     });
   });
-  module.exports = router;
 
-  router.put('/returnBook',(req, res) => {
+  router.put('/returnBook',(_req, _res) => {
     DB.query({
-        sql:'call returnBook(?,?,?)', values:[req.body.utente, req.body.libro, req.body.dataRestituzione]
+        sql:'call returnBook(?,?,?)', values:[_req.body.utente, _req.body.libro, _req.body.dataRestituzione]
         }, (_err, _result) => {
         if (_err) {
             console.log(_err);
@@ -37,4 +40,5 @@ router.post('/addPrenotazione',(req, res) => {
         } else { return _res.status(200).json(JOut(_result, {})); }
     });
   });
+
   module.exports = router;
