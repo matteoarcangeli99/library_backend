@@ -36,9 +36,9 @@ router.post('/addPrenotazione',(_req, _res) => {
     });
   });
 
-  router.post('/daRestituire',(_req, _res) => {
+  router.get('/daRestituire/:utente',(_req, _res) => {
     DB.query({
-        sql:'call daRestituire(?)', values:[_req.body.utente]
+        sql:'call daRestituire(?)', values:[_req.params.utente]
         }, (_err, _result) => {
         if (_err) {
             console.log(_err);
