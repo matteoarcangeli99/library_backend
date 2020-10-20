@@ -70,8 +70,6 @@ router.post("/caricaLibro", upload.single('copertina'), (_req, _res, _next) => {
         return _res.status(500).json(JOut(err, {}));
       }
 
-      var tipo= _req.file.mimetype;
-      
       var Libro = {
         titolo : _req.body.titolo,
         trama: _req.body.trama,
