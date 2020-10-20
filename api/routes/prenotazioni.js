@@ -36,6 +36,17 @@ router.post('/addPrenotazione',(_req, _res) => {
     });
   });
 
+  router.post('/daRestituire',(_req, _res) => {
+    DB.query({
+        sql:'call daRestituire(?)', values:[_req.body.utente]
+        }, (_err, _result) => {
+        if (_err) {
+            console.log(_err);
+            return _res.status(500).json(JOut([], {}));
+        } else { return _res.status(200).json(JOut(_result, {})); }
+    });
+  });
+
   router.put('/returnBook',(_req, _res) => {
     DB.query({
         sql:'call returnBook(?,?,?)', values:[_req.body.utente, _req.body.libro, _req.body.dataRestituzione]
