@@ -24,8 +24,5 @@ module.exports = {
     },
     error_file: "/opt/biblioteca/logs/errors.log",
     out_file: "/opt/biblioteca/logs/out.log",
-    pid_file: "/opt/biblioteca/api.pid",
-    listen_timeout: 8000,
-    kill_timeout: 1600,
-    max_restarts: 10
+    pid_file: "/opt/biblioteca/api.pid"
 };

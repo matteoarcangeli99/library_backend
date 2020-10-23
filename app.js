@@ -14,10 +14,11 @@ app.use('/api/common', require('./api/routes/common'));
 app.use('/api/libri', require('./api/routes/libri'));
 app.use('/api/prenotazioni', require('./api/routes/prenotazioni'));
 app.use('/api/upload', require('./api/routes/upload'));
-app.use('/api/administratorLogin', require('./api/administratorLogin'));
 app.use('/api/download', require('./api/routes/download'));
 app.use('/api/genere', require('./api/routes/genere'));
 app.use('/api/autori', require('./api/routes/autori'));
+app.use('/api/authentication', require('./api/routes/authentication'));
+
 
 /* ERRORI */
 app.use((_req, _res, _next) => {
