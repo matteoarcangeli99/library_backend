@@ -64,7 +64,6 @@ router.post("/addUser", (_req, _res, _next) => {
 
 
 router.get("/logout", (_req, _res) => {
-
     _req.logout();
     _res.status(200).json({});
 });

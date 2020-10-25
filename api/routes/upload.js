@@ -79,7 +79,7 @@ router.post("/caricaLibro", upload.single('copertina'), (_req, _res, _next) => {
       };
 
       DB.query({
-        sql: "call insertBook (?,?,?,?,?)",     values: [Libro.titolo, Libro.trama, Libro.copertina, Libro.quantita, Libro.genere]
+        sql: "call addBook (?,?,?,?,?)",     values: [Libro.titolo, Libro.trama, Libro.copertina, Libro.quantita, Libro.genere]
       }, (_err, _result) => {
         if (_err) {
           console.log(_err);
