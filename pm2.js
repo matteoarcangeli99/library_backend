@@ -5,7 +5,7 @@ module.exports = {
     env: {
         "NODE_ENV": "development",
         "IP": "0.0.0.0",
-        "PORT": 8090,
+        "PORT": 443,
         "VERSION": "v1",
         "MYSQL_ADDRESS": "progettopawm.ns0.it",
         "MYSQL_DB_NAME": "progettopawm",
@@ -15,7 +15,7 @@ module.exports = {
     env_production : {
         "NODE_ENV": "development",
         "IP": "0.0.0.0",
-        "PORT": 8090,
+        "PORT": 443,
         "VERSION": "v1",
         "MYSQL_ADDRESS": "progettopawm.ns0.it",
         "MYSQL_DB_NAME": "progettopawm",
