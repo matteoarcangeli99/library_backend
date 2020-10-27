@@ -10,7 +10,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 /* */
-app.use('/api/common', require('./api/routes/common'));
 app.use('/api/libri', require('./api/routes/libri'));
 app.use('/api/prenotazioni', require('./api/routes/prenotazioni'));
 app.use('/api/upload', require('./api/routes/upload'));

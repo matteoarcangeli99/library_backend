@@ -4,7 +4,9 @@ const router = express.Router();
 const path = require("path");
 const fs = require('fs');
 
-
+/**
+ * Scarica l'immagine di copertina dal FS del server
+ */
 router.get("/:copertina", (_req, _res, _next) => {
 
     if(!_req.params.copertina){

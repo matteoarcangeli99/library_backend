@@ -3,6 +3,9 @@ const router = express.Router();
 const DB = require("../../db/main");
 const JOut = require("../../shared/jout"); // Formatta rispota 
 
+/**
+ * Ritorna tutti i libri prenotati da un utente
+ */
 router.get("/libriUtente/:utente", (_req, _res, _next) => {
     DB.query({
         sql:'call getLibriUtente(?)',values:[_req.params.utente]
@@ -14,6 +17,9 @@ router.get("/libriUtente/:utente", (_req, _res, _next) => {
     });
 });
 
+/**
+ * Ritorna il numero di libri prenotati da un utente
+ */
 router.get("/numberLibriUtente/:utente", (_req, _res, _next) => {
     DB.query({
         sql:'call getNumberLibriUtente(?)',values:[_req.params.utente]
@@ -25,6 +31,9 @@ router.get("/numberLibriUtente/:utente", (_req, _res, _next) => {
     });
 });
 
+/**
+ * Aggiunge una prenotazione
+ */
 router.post('/addPrenotazione',(_req, _res) => {
     DB.query({
         sql:'call addPrenotazione(?,?,?)', values:[_req.body.utente, _req.body.libro, _req.body.dataPrenotazione]
@@ -36,6 +45,9 @@ router.post('/addPrenotazione',(_req, _res) => {
     });
   });
 
+  /**
+   * Ritorna i libri che deve restiture un utente
+   */
   router.get('/daRestituire/:utente',(_req, _res) => {
     DB.query({
         sql:'call daRestituire(?)', values:[_req.params.utente]
@@ -47,6 +59,9 @@ router.post('/addPrenotazione',(_req, _res) => {
     });
   });
 
+  /**
+   * Esegue la restituzione di un libro 
+   */
   router.put('/returnBook',(_req, _res) => {
     DB.query({
         sql:'call returnBook(?,?,?)', values:[_req.body.utente, _req.body.libro, _req.body.dataRestituzione]

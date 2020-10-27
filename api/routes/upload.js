@@ -7,14 +7,11 @@ const multer = require('multer');
 const path = require("path");
 const fs = require("fs-extra");
 
-
-
 const storage = multer.diskStorage({
   destination: function (_req, file, cb) {
     cb(null, __dirname + '/../../uploads/');
   },
   filename: function (_req, file, cb) {
-    //cb(null, new Date().toISOString() + file.originalname);
     cb(null, file.originalname);
   }
 });
@@ -22,7 +19,6 @@ const storage = multer.diskStorage({
 
 const fileFilter = (_req, file, cb) => {
   console.log(file);
-  // reject a file
   if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg' ||  file.mimetype === 'image/png' ) {
     cb(null, true);
   } else {
@@ -38,16 +34,14 @@ const upload = multer({
   fileFilter: fileFilter
 });
 
-
+/**
+ * Esegue il caricamento di un libro 
+ */
 router.post("/caricaLibro", upload.single('copertina'), (_req, _res, _next) => {
 
     var nomefile = (!_req.file) ? '' : _req.file.filename;
-    var percorso = path.resolve(__dirname + '/../../uploads');
 
-  console.log(nomefile);
-  console.log(percorso);
-
-  if (!nomefile) {
+    if (!nomefile) {
     return _res.status(500).json({
       error_code: 1,
       err_desc: 'error 500'
@@ -55,31 +49,18 @@ router.post("/caricaLibro", upload.single('copertina'), (_req, _res, _next) => {
   } else {
 
     // Rinomino immagine
-    console.log('ciao')
     var oldPath = path.resolve(__dirname + '/../../uploads/'+nomefile);
-    console.log(oldPath)
     var newName= Math.round(new Date().getTime() / 1000).toString() + '_' + nomefile;
-    console.log(newName)
     var newPath=path.resolve(__dirname+ '/../../uploads/'+newName);
 
-
-    console.log(newPath);
 
     fs.rename(oldPath, newPath , function (err) {
       if (err) {
         return _res.status(500).json(JOut(err, {}));
       }
 
-      var Libro = {
-        titolo : _req.body.titolo,
-        trama: _req.body.trama,
-        quantita: _req.body.quantita,
-        copertina : newName,
-        genere: _req.body.genere
-      };
-
       DB.query({
-        sql: "call addBook (?,?,?,?,?)",     values: [Libro.titolo, Libro.trama, Libro.copertina, Libro.quantita, Libro.genere]
+        sql: "call addBook (?,?,?,?,?)", values: [_req.body.titolo, _req.body.trama, newName, _req.body.quantita, _req.body.genere]
       }, (_err, _result) => {
         if (_err) {
           console.log(_err);
@@ -93,9 +74,6 @@ router.post("/caricaLibro", upload.single('copertina'), (_req, _res, _next) => {
 
   }
 });
-
-
-
 
 
 module.exports = router;
