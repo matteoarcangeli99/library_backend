@@ -37,7 +37,7 @@ const jwt = require("jsonwebtoken");
 });
 
 /**
- * Inserisce un' utente
+ * Inserisce un utente
  */
 router.post("/addUser", (_req, _res, _next) => {
     DB.query({
