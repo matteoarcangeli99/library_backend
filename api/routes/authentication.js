@@ -24,16 +24,22 @@ function cehckAuth(err,result) {
        
         // REMOVE FIELD
         delete result[0].password;
+
     }
 }
 
-function manageErrore(_res)
-{
-    if (_err) {
-        console.log(_err);
-        return _res.status(500).json(JOut([], {}));
-    } else { return _res.status(201).json(JOut([], {})); }
-}
+/**
+ * Esegue il login dell'amministratore
+ */
+router.post("/adminLogin", (_req, _res, _next) => {
+    DB.query({
+        sql: "call adminLogin(?,?)",
+        values: [_req.body.utente, _req.body.password]
+    }, (err, result) => {
+        cehckAuth(err, result);
+        return _res.status(200).json(JOut(result[0], {}));
+    });
+});
 
 /**
  * Esegue il login di un utente
