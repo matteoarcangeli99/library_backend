@@ -4,33 +4,10 @@ const DB = require("../../db/main");
 const JOut = require("../../shared/jout"); // Formatta rispota 
 const jwt = require("jsonwebtoken");
 
-function cehckAuth(err,result) {
-    if (err) { 
-        return _res.status(401).json(JOut({
-            statusCode: "400",
-            message: "Login failed"
-        }, {}));
-      }  
-    if (result[0].length === 0) { 
-        return _res.status(401).json(JOut({
-            statusCode: "401",
-            message: "Login failed"
-        }, {}));
-    } else {
-        result[0].jwt = jwt.sign({
-            email: result[0].email,
-            id: result[0].ID
-       }, "top_secret", { "expiresIn": "24h"});
-       
-        // REMOVE FIELD
-        delete result[0].password;
-
-    }
-}
-
 /**
  * Esegue il login dell'amministratore
  */
+
 router.post("/adminLogin", (_req, _res, _next) => {
     DB.query({
         sql: "call adminLogin(?,?)",
@@ -44,13 +21,30 @@ router.post("/adminLogin", (_req, _res, _next) => {
 /**
  * Esegue il login di un utente
  */
-  router.post("/userLogin", (_req, _res, _next) => {
+  router.post("/userLogin", (_req, _res,_next) => {
     DB.query({
-        sql: "call userLogin(?,?)",
-        values: [_req.body.email, _req.body.password]
+        sql: "SELECT * FROM Utente WHERE email = ?", values: [_req.body.email]
     }, (err, result) => {
-        cehckAuth(err, result);
+        if (err) { 
+        return _res.status(401).json(JOut({
+            statusCode: "400",
+            message: "Login failed"
+        }, {}));
+      }  
+    if (result.length === 0 || (result.password !== _req.body._password)) { 
+        return _res.status(401).json(JOut({
+            statusCode: "401",
+            message: "Login failed"
+        }, {}));
+    } else {
+        result[0].jwt = jwt.sign({
+            email: result[0].email,
+            id: result[0].ID
+       }, "top_secret", { "expiresIn": "24h"});
+        // REMOVE FIELD
+        delete result[0].password;
         return _res.status(200).json(JOut(result[0], {}));
+    }
     });
 });
 
