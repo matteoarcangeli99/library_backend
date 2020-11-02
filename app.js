@@ -17,6 +17,9 @@ app.use('/api/download', require('./api/routes/download'));
 app.use('/api/genere', require('./api/routes/genere'));
 app.use('/api/autori', require('./api/routes/autori'));
 app.use('/api/authentication', require('./api/routes/authentication'));
+app.use('/api/grafici', require('./api/routes/grafici'));
+
+
 
 
 /* ERRORI */

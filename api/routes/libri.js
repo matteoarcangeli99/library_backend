@@ -32,6 +32,20 @@ router.get("/getBook/:id", (_req, _res, _next) => {
 });
 
 /**
+ * Cerca un libro in base al titolo
+ */
+router.get("/cercaLibro/:titolo", (_req, _res, _next) => {
+    DB.query({
+        sql:'call cercaLibro(?)', values:[_req.params.titolo]
+        }, (_err, _result) => {
+        if (_err) {
+            console.log(_err);
+            return _res.status(500).json(JOut([], {}));
+        } else { return _res.status(200).json(JOut(_result, {})); }
+    });
+});
+
+/**
  * ritorna gli autori di un libro
  */
 router.get('/getBookAuthors/:libro',(_req, _res) => {
