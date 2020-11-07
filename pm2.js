@@ -7,7 +7,7 @@ module.exports = {
         "IP": "0.0.0.0",
         "PORT": 8090,
         "VERSION": "v1",
-        "MYSQL_ADDRESS": "progettopawm.ns0.it",
+        "MYSQL_ADDRESS": "localhost",
         "MYSQL_DB_NAME": "progettopawm",
         "MYSQL_DB_USER": "utente",
         "MYSQL_DB_PASS": "pincopallino"
@@ -17,7 +17,7 @@ module.exports = {
         "IP": "0.0.0.0",
         "PORT": 8090,
         "VERSION": "v1",
-        "MYSQL_ADDRESS": "progettopawm.ns0.it",
+        "MYSQL_ADDRESS": "localhost",
         "MYSQL_DB_NAME": "progettopawm",
         "MYSQL_DB_USER": "utente",
         "MYSQL_DB_PASS": "pincopallino"
