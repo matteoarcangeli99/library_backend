@@ -18,7 +18,7 @@ router.get("/getNumberLibriMese/:id", (_req, _res, _next) => {
 });
 
 /**
- * Ritorna i generi letti da un utente
+ * Ritorna il numero dei libri letti per ogni genere da un utente
  */
 router.get("/getGeneriUtente/:id", (_req, _res, _next) => {
     DB.query({

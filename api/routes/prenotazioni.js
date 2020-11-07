@@ -18,6 +18,20 @@ router.get("/libriUtente/:utente", (_req, _res, _next) => {
 });
 
 /**
+ * Ritorna i libri prenotati da un utente non ripetuti e un capo vettoriale con le date di prenotazione
+ */
+router.get("/getBookPrenotations/:utente", (_req, _res, _next) => {
+    DB.query({
+        sql:'call getBookPrenotations(?)',values:[_req.params.utente]
+        }, (_err, _result) => {
+        if (_err) {
+            console.log(_err);
+            return _res.status(500).json(JOut([], {}));
+        } else { return _res.status(200).json(JOut(_result, {})); }
+    });
+});
+
+/**
  * Ritorna il numero di libri prenotati da un utente
  */
 router.get("/numberLibriUtente/:utente", (_req, _res, _next) => {
