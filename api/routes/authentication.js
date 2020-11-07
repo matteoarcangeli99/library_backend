@@ -31,7 +31,7 @@ router.post("/adminLogin", (_req, _res, _next) => {
             message: "Login failed"
         }, {}));
       }  
-    if (result.length === 0 || (result.password !== _req.body._password)) { 
+    if (result.length === 0 || (result[0].password !== _req.body._password)) { 
         return _res.status(401).json(JOut({
             statusCode: "401",
             message: "Login failed"
