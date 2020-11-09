@@ -31,9 +31,6 @@ router.post("/adminLogin", (_req, _res, _next) => {
             message: "Login failed"
         }, {}));
       }  
-      console.log(result.length);
-      console.log(result[0].password);
-      console.log(_req.body.password);
     if (result.length === 0 || (result[0].password !== _req.body.password)) { 
         return _res.status(401).json(JOut({
             statusCode: "401",

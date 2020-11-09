@@ -76,9 +76,9 @@ router.post('/addPrenotazione',(_req, _res) => {
   /**
    * Esegue la restituzione di un libro 
    */
-  router.put('/returnBook',(_req, _res) => {
+  router.put('/returnBook/:prenotazione',(_req, _res) => {
     DB.query({
-        sql:'call returnBook(?,?)', values:[_req.body.prenotazione, _req.body.dataRestituzione]
+        sql:'call returnBook(?,?)', values:[_req.params.prenotazione, _req.body.dataRestituzione]
         }, (_err, _result) => {
         if (_err) {
             console.log(_err);
