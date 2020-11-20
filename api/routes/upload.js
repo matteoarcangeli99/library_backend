@@ -19,7 +19,7 @@ const storage = multer.diskStorage({
 
 const fileFilter = (_req, file, cb) => {
   console.log(file);
-  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg' ||  file.mimetype === 'image/png' ) {
+  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg' || file.mimetype === 'image/png') {
     cb(null, true);
   } else {
     cb(null, false);
@@ -29,7 +29,7 @@ const fileFilter = (_req, file, cb) => {
 const upload = multer({
   storage: storage,
   limits: {
-    fileSize: 1024 * 1024 * 5//MB
+    fileSize: 1024 * 1024 * 5 //MB
   },
   fileFilter: fileFilter
 });
@@ -39,9 +39,9 @@ const upload = multer({
  */
 router.post("/caricaLibro", upload.single('copertina'), (_req, _res, _next) => {
 
-    var nomefile = (!_req.file) ? '' : _req.file.filename;
+  var nomefile = (!_req.file) ? '' : _req.file.filename;
 
-    if (!nomefile) {
+  if (!nomefile) {
     return _res.status(500).json({
       error_code: 1,
       err_desc: 'error 500'
@@ -49,18 +49,19 @@ router.post("/caricaLibro", upload.single('copertina'), (_req, _res, _next) => {
   } else {
 
     // Rinomino immagine
-    var oldPath = path.resolve(__dirname + '/../../uploads/'+nomefile);
-    var newName= Math.round(new Date().getTime() / 1000).toString() + '_' + nomefile;
-    var newPath=path.resolve(__dirname+ '/../../uploads/'+newName);
+    var oldPath = path.resolve(__dirname + '/../../uploads/' + nomefile);
+    var newName = Math.round(new Date().getTime() / 1000).toString() + '_' + nomefile;
+    var newPath = path.resolve(__dirname + '/../../uploads/' + newName);
 
 
-    fs.rename(oldPath, newPath , function (err) {
+    fs.rename(oldPath, newPath, function (err) {
       if (err) {
         return _res.status(500).json(JOut(err, {}));
       }
 
       DB.query({
-        sql: "call addBook (?,?,?,?,?)", values: [_req.body.titolo, _req.body.trama, newName, _req.body.quantita, _req.body.genere]
+        sql: "call addBook (?,?,?,?,?)",
+        values: [_req.body.titolo, _req.body.trama, newName, _req.body.quantita, _req.body.genere]
       }, (_err, _result) => {
         if (_err) {
           console.log(_err);

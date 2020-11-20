@@ -9,19 +9,18 @@ const fs = require('fs');
  */
 router.get("/:copertina", (_req, _res, _next) => {
 
-    if(!_req.params.copertina){
+    if (!_req.params.copertina) {
         console.log('Percorso non esistente nella richiesta')
         return _res.status(406).json(JOut([], {}));
     }
 
-    var pathCopertina =  path.resolve(__dirname + '/../../uploads/'+_req.params.copertina);
+    var pathCopertina = path.resolve(__dirname + '/../../uploads/' + _req.params.copertina);
 
     console.log(pathCopertina);
 
     if (fs.existsSync(pathCopertina)) {
         _res.sendFile(pathCopertina);
-    }
-    else {
+    } else {
         return _res.status(500).json(JOut([], {}));
     }
 
