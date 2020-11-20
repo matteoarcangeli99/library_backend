@@ -58,7 +58,7 @@ router.post("/userLogin", (_req, _res, _next) => {
                 message: "Login failed"
             }, {}));
         } else {
-            result[0].jwt = jwt.sign({
+            result[0].jwt = 'Bearer ' + jwt.sign({
                 email: result[0].email,
                 id: result[0].ID
             }, "top_secret_progettopawm", {
