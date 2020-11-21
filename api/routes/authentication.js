@@ -8,7 +8,7 @@ const jwt = require("jsonwebtoken");
  * Esegue il login dell'amministratore
  */
 
-router.post("/adminLogin", (_req, _res, _next) => {
+router.post("/adminLogin", (_req, _res) => {
     DB.query({
         sql: "SELECT * FROM Amministrtatore WHERE utente = ?",
         values: [_req.body.utente]
@@ -25,11 +25,11 @@ router.post("/adminLogin", (_req, _res, _next) => {
                 message: "Login failed"
             }, {}));
         } else {
-            result[0].jwt = jwt.sign({
+            result[0].jwt = 'Bearer ' + jwt.sign({
                 email: result[0].email,
                 id: result[0].ID
-            }, "top_secret", {
-                "expiresIn": "24h"
+            }, "top_secret_progettopawm", {
+                "expiresIn": "48h"
             });
             // REMOVE FIELD
             delete result[0].password;
@@ -41,7 +41,7 @@ router.post("/adminLogin", (_req, _res, _next) => {
 /**
  * Esegue il login di un utente
  */
-router.post("/userLogin", (_req, _res, _next) => {
+router.post("/userLogin", (_req, _res) => {
     DB.query({
         sql: "SELECT * FROM Utente WHERE email = ?",
         values: [_req.body.email]
