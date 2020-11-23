@@ -3,24 +3,14 @@ module.exports = {
     script      : "/opt/biblioteca/server/server.js",
     cwd:         "/opt/biblioteca/www",
     env: {
-        "NODE_ENV": "development",
-        "IP": "0.0.0.0",
+       // REMOVE"NODE_ENV": "development",
+        // REMOVE"IP": "0.0.0.0",
         "PORT": 8090,
-        "VERSION": "v1",
-        "MYSQL_ADDRESS": "localhost",
-        "MYSQL_DB_NAME": "progettopawm",
-        "MYSQL_DB_USER": "utente",
-        "MYSQL_DB_PASS": "pincopallino"
-    },
-    env_production : {
-        "NODE_ENV": "development",
-        "IP": "0.0.0.0",
-        "PORT": 8090,
-        "VERSION": "v1",
-        "MYSQL_ADDRESS": "localhost",
-        "MYSQL_DB_NAME": "progettopawm",
-        "MYSQL_DB_USER": "utente",
-        "MYSQL_DB_PASS": "pincopallino"
+      // REMOVE  "VERSION": "v1",
+        "MYSQL_ADDRESS": process.env.MYSQL_ADDRESS,
+        "MYSQL_DB_NAME": process.env.MYSQL_DB_NAME,
+        "MYSQL_DB_USER": process.env.MYSQL_DB_USER,
+        "MYSQL_DB_PASS": process.env.MYSQL_DB_PASS
     },
     error_file: "/opt/biblioteca/logs/errors.log",
     out_file: "/opt/biblioteca/logs/out.log",
