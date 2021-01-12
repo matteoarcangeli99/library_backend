@@ -96,5 +96,16 @@ router.get("/logout", (_req, _res) => {
     _res.status(200).json({});
 });
 
+router.get("/test", (_req, _res) => {
+   try {
+        const token = req.headers.authorization.split(" ")[1];
+        const decoded = jwt.verify(token, "top_secret_progettopawm");
+    } catch (error) {
+        _res.status(401).json({
+            message: 'Auth failed'
+        })
+    }
+    _res.status(200).json({});
+});
 
 module.exports = router;
