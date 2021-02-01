@@ -62,7 +62,7 @@ router.post("/userLogin", (_req, _res) => {
                 email: result[0].email,
                 id: result[0].ID
             }, "top_secret_progettopawm", {
-                "expiresIn": "48h"
+                "expiresIn": "365d"
             });
             // REMOVE FIELD
             delete result[0].password;
