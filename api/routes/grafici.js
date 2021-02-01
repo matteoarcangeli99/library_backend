@@ -6,10 +6,10 @@ const JOut = require("../../shared/jout"); // Formatta rispota
 /**
  * Ritorna il numero di libri letti da un utente nei vari mesi
  */
-router.get("/getNumberLibriMese/:id&:anno", (_req, _res, _next) => {
+router.get("/getNumberLibriMese", (_req, _res, _next) => {
     DB.query({
         sql: 'call getNumberLibriMese(?, ?)',
-        values: [_req.params.id, _req.params.anno]
+        values: [_req.query.utente, _req.query.anno]
     }, (_err, _result) => {
         if (_err) {
             console.log(_err);

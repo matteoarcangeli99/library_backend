@@ -74,7 +74,7 @@ router.post("/userLogin", (_req, _res) => {
 /**
  * Inserisce un utente
  */
-router.post("/addUser", (_req, _res, _next) => {
+router.post("/addUser", (_req, _res) => {
     DB.query({
         sql: " call addUser(?, ?, ?, ?)",
         values: [_req.body.nome, _req.body.cognome, _req.body.email, _req.body.password]

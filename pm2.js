@@ -3,8 +3,6 @@ module.exports = {
     script      : "/opt/biblioteca/server/server.js",
     cwd:         "/opt/biblioteca/www",
     env: {
-       // REMOVE"NODE_ENV": "development",
-        // REMOVE"IP": "0.0.0.0",
         "PORT": 8090,
       // REMOVE  "VERSION": "v1",
         "MYSQL_ADDRESS": process.env.MYSQL_ADDRESS,
