@@ -10,12 +10,12 @@ const jwt = require("jsonwebtoken");
 
 router.post("/adminLogin", (_req, _res) => {
     DB.query({
-        sql: "SELECT * FROM Amministrtatore WHERE utente = ?",
+        sql: "SELECT * FROM Amministratore WHERE utente = ?",
         values: [_req.body.utente]
     }, (err, result) => {
         if (err) {
             return _res.status(401).json(JOut({
-                statusCode: "400",
+                statusCode: "401",
                 message: "Login failed"
             }, {}));
         }
@@ -29,7 +29,7 @@ router.post("/adminLogin", (_req, _res) => {
                 email: result[0].email,
                 id: result[0].ID
             }, "top_secret_progettopawm", {
-                "expiresIn": "48h"
+                "expiresIn": "365d"
             });
             // REMOVE FIELD
             delete result[0].password;
@@ -48,7 +48,7 @@ router.post("/userLogin", (_req, _res) => {
     }, (err, result) => {
         if (err) {
             return _res.status(401).json(JOut({
-                statusCode: "400",
+                statusCode: "401",
                 message: "Login failed"
             }, {}));
         }

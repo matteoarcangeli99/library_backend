@@ -4,8 +4,7 @@ module.exports = {
     cwd:         "/opt/biblioteca/www",
     env: {
         "PORT": 8090,
-      // REMOVE  "VERSION": "v1",
-        "MYSQL_ADDRESS": process.env.MYSQL_ADDRESS,
+        "MYSQL_ADDRESS": localhost,
         "MYSQL_DB_NAME": process.env.MYSQL_DB_NAME,
         "MYSQL_DB_USER": process.env.MYSQL_DB_USER,
         "MYSQL_DB_PASS": process.env.MYSQL_DB_PASS
