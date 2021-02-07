@@ -3,6 +3,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const JOut = require("./shared/jout.js");
+const cors = require('cors')
+
+app.use(cors())
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({
