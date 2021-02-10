@@ -93,8 +93,7 @@ router.post("/addUser", (_req, _res) => {
  */
 router.post("/getUsers", (_req, _res) => {
     DB.query({
-        sql: " call getUsers()",
-        values: [_req.body.nome, _req.body.cognome, _req.body.email, _req.body.password]
+        sql: " call getUsers()"
     }, (_err, _result) => {
         if (_err) {
             console.log(_err);
@@ -103,5 +102,6 @@ router.post("/getUsers", (_req, _res) => {
             return _res.status(201).json(JOut([], {}));
         }
     });
+});
 
 module.exports = router;
