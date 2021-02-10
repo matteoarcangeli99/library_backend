@@ -89,11 +89,19 @@ router.post("/addUser", (_req, _res) => {
 });
 
 /**
- * Esegue il logout
+ * Ritorna tutti gli utenti
  */
-router.get("/logout", (_req, _res) => {
-    _req.logout();
-    _res.status(200).json({});
-});
+router.post("/getUsers", (_req, _res) => {
+    DB.query({
+        sql: " call getUsers()",
+        values: [_req.body.nome, _req.body.cognome, _req.body.email, _req.body.password]
+    }, (_err, _result) => {
+        if (_err) {
+            console.log(_err);
+            return _res.status(500).json(JOut([], {}));
+        } else {
+            return _res.status(201).json(JOut([], {}));
+        }
+    });
 
 module.exports = router;
