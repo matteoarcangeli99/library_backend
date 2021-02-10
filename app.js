@@ -9,6 +9,24 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+
+/* CORS */
+app.use((_req, _res, _next) => {
+    _res.header("Access-Control-Allow-Origin", "*");
+    _res.header("Access-Control-Allow-Credentials", "true");
+    _res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Request-With, Content-Type, Accept, Authorization"
+    );
+
+    /* OPTIONS METHOD */
+    if (_req.method === "OPTIONS") {
+        _res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+        return _res.status(200).json({});
+    }
+    _next();
+});
+
 /* */
 app.use('/api/libri', require('./api/middleware/check-auth'), require('./api/routes/libri'));
 app.use('/api/prenotazioni', require('./api/middleware/check-auth'), require('./api/routes/prenotazioni'));
