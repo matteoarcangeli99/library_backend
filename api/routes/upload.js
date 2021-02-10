@@ -1,5 +1,4 @@
-const express = require("express");
-const router = express.Router();
+const polka = require("polka");
 const DB = require("../../db/main");
 const JOut = require("../../shared/jout");
 
@@ -37,7 +36,7 @@ const upload = multer({
 /**
  * Esegue il caricamento di un libro 
  */
-router.post("/caricaLibro", upload.single('copertina'), (_req, _res, _next) => {
+polka().post("/caricaLibro", upload.single('copertina'), (_req, _res, _next) => {
 
   var nomefile = (!_req.file) ? '' : _req.file.filename;
 
@@ -75,6 +74,3 @@ router.post("/caricaLibro", upload.single('copertina'), (_req, _res, _next) => {
 
   }
 });
-
-
-module.exports = router;

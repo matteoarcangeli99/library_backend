@@ -1,12 +1,11 @@
-const express = require("express");
-const router = express.Router();
+const polka = require("polka");
 const DB = require("../../db/main");
 const JOut = require("../../shared/jout"); // Formatta rispota 
 
 /**
  * Aggiunge un autore nel
  */
-router.post('/addAutore', (_req, _res, _next) => {
+polka().post('/addAutore', (_req, _res, _next) => {
     DB.query({
         sql: 'call insertAuthor(?,?,?)',
         values: [_req.body.nome, _req.body.cognome, _req.body.dataNascita]
@@ -23,7 +22,7 @@ router.post('/addAutore', (_req, _res, _next) => {
 /**
  * Ritorna tutti i libri scritti da un autore
  */
-router.get('/getAuthorBooks/:autore', (_req, _res, _next) => {
+polka().get('/getAuthorBooks/:autore', (_req, _res, _next) => {
     DB.query({
         sql: 'call getAuthorBooks(?)',
         values: [_req.params.autore]
@@ -36,4 +35,3 @@ router.get('/getAuthorBooks/:autore', (_req, _res, _next) => {
         }
     });
 });
-module.exports = router;

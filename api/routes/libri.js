@@ -1,12 +1,12 @@
-const express = require("express");
-const router = express.Router();
+const polka = require("polka");
+const route = polka();
 const DB = require("../../db/main");
 const JOut = require("../../shared/jout"); // Formatta rispota 
 
 /**
  * Ritorna tutti i libri presenti
  */
-router.get("/getAll", (_req, _res, _next) => {
+route.get("/getAll", (_req, _res, _next) => {
     DB.query({
         sql: 'call getAllLibri()'
     }, (_err, _result) => {
@@ -22,7 +22,7 @@ router.get("/getAll", (_req, _res, _next) => {
 /**
  * Ritorna un libro dato un ID
  */
-router.get("/getBook/:id", (_req, _res, _next) => {
+route.get("/getBook/:id", (_req, _res, _next) => {
     DB.query({
         sql: 'call getBook(?)',
         values: [_req.params.id]
@@ -39,7 +39,7 @@ router.get("/getBook/:id", (_req, _res, _next) => {
 /**
  * Cerca un libro in base al titolo
  */
-router.get("/cercaLibro/:titolo", (_req, _res, _next) => {
+route.get("/cercaLibro/:titolo", (_req, _res, _next) => {
     DB.query({
         sql: 'call cercaLibro(?)',
         values: [_req.params.titolo]
@@ -56,7 +56,7 @@ router.get("/cercaLibro/:titolo", (_req, _res, _next) => {
 /**
  * ritorna gli autori di un libro
  */
-router.get('/getBookAuthors/:libro', (_req, _res, _next) => {
+route.get('/getBookAuthors/:libro', (_req, _res, _next) => {
     DB.query({
         sql: 'call getBookAuthors(?)',
         values: [_req.params.libro]
@@ -69,5 +69,4 @@ router.get('/getBookAuthors/:libro', (_req, _res, _next) => {
         }
     });
 });
-
-module.exports = router;
+module.exports =route;
