@@ -1,5 +1,5 @@
-const polka = require("polka");
-//const router = polka.Router();
+const express = require("express");
+const router = express.Router();
 const DB = require("../../db/main");
 const JOut = require("../../shared/jout"); // Formatta rispota 
 const jwt = require("jsonwebtoken");
@@ -8,7 +8,7 @@ const jwt = require("jsonwebtoken");
  * Esegue il login dell'amministratore
  */
 
-polka().post("/adminLogin", (_req, _res) => {
+router.post("/adminLogin", (_req, _res) => {
     DB.query({
         sql: "SELECT * FROM Amministratore WHERE utente = ?",
         values: [_req.body.utente]
@@ -41,7 +41,7 @@ polka().post("/adminLogin", (_req, _res) => {
 /**
  * Esegue il login di un utente
  */
-polka().post("/userLogin", (_req, _res) => {
+router.post("/userLogin", (_req, _res) => {
     DB.query({
         sql: "SELECT * FROM Utente WHERE email = ?",
         values: [_req.body.email]
@@ -74,7 +74,7 @@ polka().post("/userLogin", (_req, _res) => {
 /**
  * Inserisce un utente
  */
-polka().post("/addUser", (_req, _res) => {
+router.post("/addUser", (_req, _res) => {
     DB.query({
         sql: " call addUser(?, ?, ?, ?)",
         values: [_req.body.nome, _req.body.cognome, _req.body.email, _req.body.password]
@@ -91,9 +91,9 @@ polka().post("/addUser", (_req, _res) => {
 /**
  * Esegue il logout
  */
-polka().get("/logout", (_req, _res) => {
+router.get("/logout", (_req, _res) => {
     _req.logout();
     _res.status(200).json({});
 });
 
-//module.exports = router;
+module.exports = router;

@@ -1,4 +1,5 @@
-const polka = require("polka");
+const express = require("express");
+const router = express.Router();
 
 const path = require("path");
 const fs = require('fs');
@@ -6,7 +7,7 @@ const fs = require('fs');
 /**
  * Scarica l'immagine di copertina dal FS del server
  */
-polka().get("/:copertina", (_req, _res, _next) => {
+router.get("/:copertina", (_req, _res, _next) => {
 
     if (!_req.params.copertina) {
         console.log('Percorso non esistente nella richiesta')
@@ -24,3 +25,5 @@ polka().get("/:copertina", (_req, _res, _next) => {
     }
 
 });
+
+module.exports = router;

@@ -1,11 +1,12 @@
-const polka = require("polka");
+const express = require("express");
+const router = express.Router();
 const DB = require("../../db/main");
 const JOut = require("../../shared/jout"); // Formatta rispota 
 
 /**
  * Ritorna tutti i generi dei libri
  */
-polka().get("/getAllKinds", (_req, _res, _next) => {
+router.get("/getAllKinds", (_req, _res, _next) => {
     DB.query({
         sql: 'call getAllKinds()'
     }, (_err, _result) => {
@@ -21,7 +22,7 @@ polka().get("/getAllKinds", (_req, _res, _next) => {
 /**
  * Aggiunge un nuovo genere 
  */
-polka().post('/addGenere', (_req, _res, _next) => {
+router.post('/addGenere', (_req, _res, _next) => {
     DB.query({
         sql: 'call addGenere(?)',
         values: [_req.body.genere]
@@ -34,3 +35,5 @@ polka().post('/addGenere', (_req, _res, _next) => {
         }
     });
 });
+
+module.exports = router;

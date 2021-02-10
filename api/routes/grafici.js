@@ -1,11 +1,12 @@
-const polka = require("polka");
+const express = require("express");
+const router = express.Router();
 const DB = require("../../db/main");
 const JOut = require("../../shared/jout"); // Formatta rispota 
 
 /**
  * Ritorna il numero di libri letti da un utente nei vari mesi
  */
-polka().get("/getNumberLibriMese", (_req, _res, _next) => {
+router.get("/getNumberLibriMese", (_req, _res, _next) => {
     DB.query({
         sql: 'call getNumberLibriMese(?, ?)',
         values: [_req.query.utente, _req.query.anno]
@@ -22,7 +23,7 @@ polka().get("/getNumberLibriMese", (_req, _res, _next) => {
 /**
  * Ritorna il numero dei libri letti per ogni genere da un utente
  */
-polka().get("/getGeneriUtente/:id", (_req, _res, _next) => {
+router.get("/getGeneriUtente/:id", (_req, _res, _next) => {
     DB.query({
         sql: 'call getGeneriUtente(?)',
         values: [_req.params.id]
@@ -40,7 +41,7 @@ polka().get("/getGeneriUtente/:id", (_req, _res, _next) => {
 /**
  * Ritorna il numero di libri letti dai vari utenti nei mesi
  */
-polka().get("/getAllNumberLibriMese", (_req, _res, _next) => {
+router.get("/getAllNumberLibriMese", (_req, _res, _next) => {
     DB.query({
         sql: 'call getAllNumberLibriMese'
     }, (_err, _result) => {
@@ -56,7 +57,7 @@ polka().get("/getAllNumberLibriMese", (_req, _res, _next) => {
 /**
  * Ritorna il numero dei libri letti per ogni genere dagli utenti
  */
-polka().get("/getAllGeneri", (_req, _res, _next) => {
+router.get("/getAllGeneri", (_req, _res, _next) => {
     DB.query({
         sql: 'call getAllGeneri'
     }, (_err, _result) => {
@@ -68,3 +69,5 @@ polka().get("/getAllGeneri", (_req, _res, _next) => {
         }
     });
 });
+
+module.exports = router;
