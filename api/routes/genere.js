@@ -11,8 +11,7 @@ router.get("/getAllKinds", (_req, _res, _next) => {
         sql: 'call getAllKinds()'
     }, (_err, _result) => {
         if (_err) {
-            console.log(_err);
-            return _res.status(500).json(JOut([], {}));
+            return _res.status(500).json(JOut(_err, {}));
         } else {
             return _res.status(200).json(JOut(_result, {}));
         }
@@ -28,8 +27,7 @@ router.post('/addGenere', (_req, _res, _next) => {
         values: [_req.body.genere]
     }, (_err, _result) => {
         if (_err) {
-            console.log(_err);
-            return _res.status(500).json(JOut([], {}));
+            return _res.status(500).json(JOut(_err, {}));
         } else {
             return _res.status(200).json(JOut(_result, {}));
         }

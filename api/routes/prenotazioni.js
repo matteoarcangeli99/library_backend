@@ -12,8 +12,7 @@ router.get("/libriUtente/:utente", (_req, _res, _next) => {
         values: [_req.params.utente]
     }, (_err, _result) => {
         if (_err) {
-            console.log(_err);
-            return _res.status(500).json(JOut([], {}));
+            return _res.status(500).json(JOut(_err, {}));
         } else {
             return _res.status(200).json(JOut(_result, {}));
         }
@@ -29,8 +28,7 @@ router.get("/getBookPrenotations/:utente", (_req, _res, _next) => {
         values: [_req.params.utente]
     }, (_err, _result) => {
         if (_err) {
-            console.log(_err);
-            return _res.status(500).json(JOut([], {}));
+            return _res.status(500).json(JOut(_err, {}));
         } else {
             return _res.status(200).json(JOut(_result, {}));
         }
@@ -46,8 +44,7 @@ router.get("/numberLibriUtente/:utente", (_req, _res, _next) => {
         values: [_req.params.utente]
     }, (_err, _result) => {
         if (_err) {
-            console.log(_err);
-            return _res.status(500).json(JOut([], {}));
+            return _res.status(500).json(JOut(_err, {}));
         } else {
             return _res.status(200).json(JOut(_result, {}));
         }
@@ -63,8 +60,7 @@ router.post('/addPrenotazione', (_req, _res, _next) => {
         values: [_req.body.utente, _req.body.libro, _req.body.dataPrenotazione]
     }, (_err, _result) => {
         if (_err) {
-            console.log(_err);
-            return _res.status(500).json(JOut([], {}));
+            return _res.status(500).json(JOut(_err, {}));
         } else {
             return _res.status(200).json(JOut(_result, {}));
         }
@@ -80,8 +76,7 @@ router.get('/daRestituire/:utente', (_req, _res, _next) => {
         values: [_req.params.utente]
     }, (_err, _result) => {
         if (_err) {
-            console.log(_err);
-            return _res.status(500).json(JOut([], {}));
+            return _res.status(500).json(JOut(_err, {}));
         } else {
             return _res.status(200).json(JOut(_result, {}));
         }
@@ -97,8 +92,7 @@ router.put('/returnBook/:prenotazione', (_req, _res, _next) => {
         values: [_req.params.prenotazione, _req.body.dataRestituzione]
     }, (_err, _result) => {
         if (_err) {
-            console.log(_err);
-            return _res.status(500).json(JOut([], {}));
+            return _res.status(500).json(JOut(_err, {}));
         } else {
             return _res.status(200).json(JOut(_result, {}));
         }

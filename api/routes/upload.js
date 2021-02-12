@@ -64,8 +64,7 @@ router.post("/caricaLibro", upload.single('copertina'), (_req, _res, _next) => {
         values: [_req.body.titolo, _req.body.trama, newName, _req.body.quantita, _req.body.genere]
       }, (_err, _result) => {
         if (_err) {
-          console.log(_err);
-          return _res.status(500).json(JOut([], {}));
+          return _res.status(500).json(JOut(err, {}));
         } else {
           return _res.status(200).json(JOut([], {}));
         }
@@ -75,6 +74,5 @@ router.post("/caricaLibro", upload.single('copertina'), (_req, _res, _next) => {
 
   }
 });
-
 
 module.exports = router;

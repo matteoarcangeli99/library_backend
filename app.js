@@ -14,17 +14,6 @@ app.use(bodyParser.json());
 /* CORS */
 app.use((_req, _res, _next) => {
     _res.header("Access-Control-Allow-Origin", "*");
-    _res.header("Access-Control-Allow-Credentials", "true");
-    _res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Request-With, Content-Type, Accept, Authorization"
-    );
-
-    /* OPTIONS METHOD */
-    if (_req.method === "OPTIONS") {
-        _res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
-        return _res.status(200).json({});
-    }
     _next();
 });
 

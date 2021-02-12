@@ -11,8 +11,7 @@ router.get("/getAll", (_req, _res, _next) => {
         sql: 'call getAllLibri()'
     }, (_err, _result) => {
         if (_err) {
-            console.log(_err);
-            return _res.status(500).json(JOut([], {}));
+            return _res.status(500).json(JOut(_err, {}));
         } else {
             return _res.status(200).json(JOut(_result, {}));
         }
@@ -28,8 +27,7 @@ router.get("/getBook/:id", (_req, _res, _next) => {
         values: [_req.params.id]
     }, (_err, _result) => {
         if (_err) {
-            console.log(_err);
-            return _res.status(500).json(JOut([], {}));
+            return _res.status(500).json(JOut(_err, {}));
         } else {
             return _res.status(200).json(JOut(_result, {}));
         }
@@ -45,8 +43,7 @@ router.get("/cercaLibro/:titolo", (_req, _res, _next) => {
         values: [_req.params.titolo]
     }, (_err, _result) => {
         if (_err) {
-            console.log(_err);
-            return _res.status(500).json(JOut([], {}));
+            return _res.status(500).json(JOut(_err, {}));
         } else {
             return _res.status(200).json(JOut(_result, {}));
         }
@@ -62,8 +59,7 @@ router.get('/getBookAuthors/:libro', (_req, _res, _next) => {
         values: [_req.params.libro]
     }, (_err, _result) => {
         if (_err) {
-            console.log(_err);
-            return _res.status(500).json(JOut([], {}));
+            return _res.status(500).json(JOut(_err, {}));
         } else {
             return _res.status(200).json(JOut(_result, {}));
         }

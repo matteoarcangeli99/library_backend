@@ -9,6 +9,7 @@ const jwt = require("jsonwebtoken");
  */
 
 router.post("/adminLogin", (_req, _res) => {
+    console.log(_req.body.utente)
     DB.query({
         sql: "SELECT * FROM Amministratore WHERE utente = ?",
         values: [_req.body.utente]
@@ -74,7 +75,7 @@ router.post("/userLogin", (_req, _res) => {
 /**
  * Inserisce un utente
  */
-router.post("/addUser", (_req, _res, _next) => {
+router.post("/addUser", (_req, _res) => {
     DB.query({
         sql: " call addUser(?, ?, ?, ?)",
         values: [_req.body.nome, _req.body.cognome, _req.body.email, _req.body.password]
@@ -90,15 +91,14 @@ router.post("/addUser", (_req, _res, _next) => {
 /**
  * Ritorna tutti gli utenti
  */
-router.get("/getUsers", (_req, _res) => {
+router.get("/getUsers", (_req, _res, _next) => {
     DB.query({
         sql: " call getUsers()"
     }, (_err, _result) => {
         if (_err) {
-            console.log(_err);
-            return _res.status(500).json(JOut([], {}));
+            return _res.status(500).json(JOut(err, {}));
         } else {
-            return _res.status(201).json(JOut(_result, {}));
+            return _res.status(200).json(JOut(_result, {}));
         }
     });
 });

@@ -12,8 +12,7 @@ router.post('/addAutore', (_req, _res, _next) => {
         values: [_req.body.nome, _req.body.cognome, _req.body.dataNascita]
     }, (_err, _result) => {
         if (_err) {
-            console.log(_err);
-            return _res.status(500).json(JOut([], {}));
+            return _res.status(500).json(JOut(_err, {}));
         } else {
             return _res.status(200).json(JOut(_result, {}));
         }
@@ -29,8 +28,7 @@ router.get('/getAuthorBooks/:autore', (_req, _res, _next) => {
         values: [_req.params.autore]
     }, (_err, _result) => {
         if (_err) {
-            console.log(_err);
-            return _res.status(500).json(JOut([], {}));
+            return _res.status(500).json(JOut(_err, {}));
         } else {
             return _res.status(200).json(JOut(_result, {}));
         }
