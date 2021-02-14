@@ -84,7 +84,7 @@ router.get('/daRestituire/:utente', (_req, _res, _next) => {
 });
 
 /**
- * Esegue la restituzione di un libro 
+ * Esegue la restituzione di un libro
  */
 router.put('/returnBook/:prenotazione', (_req, _res, _next) => {
     DB.query({

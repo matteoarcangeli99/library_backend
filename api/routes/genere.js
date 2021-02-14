@@ -19,7 +19,7 @@ router.get("/getAllKinds", (_req, _res, _next) => {
 });
 
 /**
- * Aggiunge un nuovo genere 
+ * Aggiunge un nuovo genere
  */
 router.post('/addGenere', (_req, _res, _next) => {
     DB.query({

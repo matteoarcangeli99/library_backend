@@ -66,4 +66,20 @@ router.get('/getBookAuthors/:libro', (_req, _res, _next) => {
     });
 });
 
+/**
+ * Associa il libro ad un autore
+ */
+router.post('/associaAutore', (_req, _res, _next) => {
+    DB.query({
+        sql: 'call associaAutore(?, ?)',
+        values: [_req.body.libro, _req.body.autore]
+    }, (_err, _result) => {
+        if (_err) {
+            return _res.status(500).json(JOut(_err, {}));
+        } else {
+            return _res.status(200).json(JOut(_result, {}));
+        }
+    });
+});
+
 module.exports = router;
