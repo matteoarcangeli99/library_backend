@@ -61,7 +61,7 @@ router.post("/caricaLibro", upload.single('copertina'), (_req, _res, _next) => {
 
             DB.query({
                 sql: "call addBook (?,?,?,?,?)",
-                values: [_req.body.titolo, _req.body.trama, newName, _req.body.quantita, _req.body.genere]
+                values: [_req.body.titolo, _req.body.genere, _req.body.trama, newName, _req.body.quantita]
             }, (_err, _result) => {
                 if (_err) {
                     return _res.status(500).json(JOut(err, {}));
