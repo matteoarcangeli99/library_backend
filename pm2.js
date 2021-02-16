@@ -1,7 +1,7 @@
 module.exports = {
-    name        : "biblioteca",
-    script      : "/opt/biblioteca/server/server.js",
-    cwd:         "/opt/biblioteca/www",
+    name: "biblioteca",
+    script: "/opt/biblioteca/server/server.js",
+    cwd: "/opt/biblioteca/www",
     env: {
         "PORT": 8090,
         "MYSQL_ADDRESS": localhost,

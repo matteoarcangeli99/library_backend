@@ -19,6 +19,28 @@ router.get("/getAll", (_req, _res, _next) => {
 });
 
 /**
+ * Ritorna tutti i libri presenti paginando il risultato
+ */
+router.get("/getAll2", (_req, _res, _next) => {
+    var page = _req.query.page;
+    var pageSize = _req.query.pagesize;
+
+    var limit1 = page * pageSize;
+    var limit2 = limit1 + pageSize
+
+    DB.query({
+        sql: 'call GetLibri2(?, ?)',
+        values: [limit1, limit2]
+    }, (_err, _result) => {
+        if (_err) {
+            return _res.status(500).json(JOut(_err, {}));
+        } else {
+            return _res.status(200).json(JOut(_result, {}));
+        }
+    });
+});
+
+/**
  * Ritorna un libro dato un ID
  */
 router.get("/getBook/:id", (_req, _res, _next) => {
@@ -37,10 +59,10 @@ router.get("/getBook/:id", (_req, _res, _next) => {
 /**
  * Cerca un libro in base al titolo
  */
-router.get("/cercaLibro/:titolo", (_req, _res, _next) => {
+router.get("/cercaLibro/:libro", (_req, _res, _next) => {
     DB.query({
         sql: 'call cercaLibro(?)',
-        values: [_req.params.titolo]
+        values: [_req.params.libro]
     }, (_err, _result) => {
         if (_err) {
             return _res.status(500).json(JOut(_err, {}));
