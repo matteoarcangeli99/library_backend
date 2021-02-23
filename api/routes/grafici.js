@@ -41,9 +41,9 @@ router.get("/getGeneriUtente/:id", (_req, _res, _next) => {
 /**
  * Ritorna il numero di libri letti dai vari utenti nei mesi
  */
-router.get("/getAllNumberLibriMese", (_req, _res, _next) => {
+router.get("/getAllNumberLibriMese/:anno", (_req, _res, _next) => {
     DB.query({
-        sql: 'call getAllNumberLibriMese'
+        sql: 'call getAllNumberLibriMese(?)',values: [_req.params.anno]
     }, (_err, _result) => {
         if (_err) {
             return _res.status(500).json(JOut(_err, {}));
